@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Menu() {
   return (
@@ -14,39 +14,6 @@ function Menu() {
             </NavLink>
           </li>
         ))}
-        {/* <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/blog">Blog</Link>
-        </li>
-        <li>
-          <Link to="/profile">Profile</Link>
-        </li> */}
-        {/* <li>
-          <NavLink
-            style={({ isActive }) => ({ color: isActive ? "red" : "blue" })}
-            to="/"
-          >
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            style={({ isActive }) => ({ color: isActive ? "red" : "blue" })}
-            to="/Blog"
-          >
-            Blog
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            style={({ isActive }) => ({ color: isActive ? "red" : "blue" })}
-            to="/Profile"
-          >
-            Profile
-          </NavLink>
-        </li> */}
       </ul>
     </nav>
   );
@@ -64,5 +31,13 @@ routes.push({
 routes.push({
   to: "/profile",
   text: "Profile",
+});
+routes.push({
+  to: "/login",
+  text: "Login",
+});
+routes.push({
+  to: "/Logout",
+  text: "Logout",
 });
 export { Menu };
