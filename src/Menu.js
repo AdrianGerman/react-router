@@ -50,7 +50,7 @@ routes.push({
   private: false,
 });
 routes.push({
-  to: "/Logout",
+  to: "/logout",
   text: "Logout",
   private: true,
 });
