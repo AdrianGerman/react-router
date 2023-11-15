@@ -1,4 +1,4 @@
-import { useAuth } from "./auth";
+import { useAuth } from "../../services/auth";
 
 function LogoutPage() {
   const auth = useAuth();

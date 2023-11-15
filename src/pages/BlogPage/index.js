@@ -1,31 +1,51 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { blogdata } from "./blogdata";
-import { useAuth } from "./auth";
+import React from "react";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../services/auth";
+import { useBlog } from "../../services/blog";
 
-function BlogPost() {
+function BlogPage() {
   const navigate = useNavigate();
-  const { slug } = useParams();
-
-  const auth = useAuth();
-
-  const blogpost = blogdata.find((post) => post.slug === slug);
-
-  const canDelete =
-    auth.user?.isAdmin || blogpost.author === auth.user?.username;
-
-  const returnToBlog = () => {
-    navigate("/blog");
-  };
+  const location = useLocation();
+  const { blogs } = useBlog();
+  const { isLogged } = useAuth();
 
   return (
     <>
-      <h2>{blogpost.title}</h2>
-      <button onClick={returnToBlog}>Volver al blog</button>
-      <p>{blogpost.author}</p>
-      <p>{blogpost.content}</p>
-      {canDelete && <button>Eliminar blogpost</button>}
+      <h1>BlogPage</h1>
+
+      {isLogged ? (
+        <button onClick={() => navigate("/blog/create")}>Add blog</button>
+      ) : (
+        <button
+          onClick={() =>
+            navigate("/login", { replace: true, state: { from: location } })
+          }
+        >
+          Login to add a new blog
+        </button>
+      )}
+
+      {blogs.length > 0 ? (
+        <ul>
+          {blogs.map((post) => (
+            <BlogLink key={post.slug} {...{ post }} />
+          ))}
+        </ul>
+      ) : (
+        <p>Not blogs</p>
+      )}
+
+      <Outlet />
     </>
   );
 }
 
-export { BlogPost };
+function BlogLink({ post }) {
+  return (
+    <li>
+      <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+    </li>
+  );
+}
+
+export { BlogPage };
