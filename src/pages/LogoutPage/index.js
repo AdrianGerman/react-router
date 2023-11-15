@@ -1,4 +1,5 @@
-import { useAuth } from "../../services/auth";
+import React from "react";
+import { useAuth } from "services/auth";
 
 function LogoutPage() {
   const auth = useAuth();
@@ -7,12 +8,14 @@ function LogoutPage() {
     e.preventDefault();
     auth.logout();
   };
+
   return (
     <>
-      <h1>Logout</h1>
+      <h1>LogoutPage</h1>
 
       <form onSubmit={logout}>
-        <label>¿Seguro que quieres cerrar sesión?</label> <br /> <br />
+        <label>¿Seguro que quires salir?</label>
+
         <button type="submit">Salir</button>
       </form>
     </>
