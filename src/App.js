@@ -7,6 +7,7 @@ import { BlogPost } from "components/BlogPost";
 import { LoginPage } from "pages/LoginPage";
 import { LogoutPage } from "pages/LogoutPage";
 import { AuthProvider, AuthRoute } from "services/auth";
+import { BlogProvider } from "services/blog";
 
 import "./App.css";
 
