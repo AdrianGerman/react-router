@@ -1,25 +1,31 @@
 import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-
-const adminList = ["eli", "jack", "gory"];
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const AuthContext = React.createContext();
 
 function AuthProvider({ children }) {
   const navigate = useNavigate();
+  const location = useLocation();
   const [user, setUser] = React.useState(null);
 
-  const login = ({ username }) => {
-    const isAdmin = !!adminList.find((admin) => admin === username);
-    setUser({ username, isAdmin });
-    navigate("/profile");
+  const login = (user) => {
+    setUser(user);
+    const path = location.state?.from?.pathname || "/profile";
+    return navigate(path, { replace: true });
   };
+
   const logout = () => {
     setUser(null);
     navigate("/");
   };
 
-  const auth = { user, login, logout };
+  const update = (data) => {
+    setUser({ ...user, ...data });
+  };
+
+  const isLogged = user !== null;
+
+  const auth = { user, login, logout, update, isLogged };
 
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 }
@@ -30,13 +36,12 @@ function useAuth() {
 }
 
 function AuthRoute(props) {
-  const auth = useAuth();
-
+  const auth = React.useContext(AuthContext);
   if (!auth.user) {
     return <Navigate to="/login" />;
-  } else {
-    return props.children;
   }
+
+  return props.children;
 }
 
 export { AuthProvider, useAuth, AuthRoute };

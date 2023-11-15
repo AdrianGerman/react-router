@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { useAuth } from "./auth";
 import { ADMIN } from "../data/roles";

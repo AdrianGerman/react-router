@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, useParams } from "react-router-dom";
-import { blogdata } from "data/blogdata";
+import { blogdata } from "../data/blogdata";
 
 const BlogContext = React.createContext();
 
@@ -10,6 +10,7 @@ const BlogProvider = ({ children }) => {
   const create = (blog) => {
     setBlogs((prevState) => [blog, ...prevState]);
   };
+
   const remove = (slug) => {
     const idx = blogs.findIndex((blog) => blog.slug === slug);
 
