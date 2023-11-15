@@ -23,7 +23,7 @@ function BlogPost() {
       <button onClick={returnToBlog}>Volver al blog</button>
       <p>{blogpost.author}</p>
       <p>{blogpost.content}</p>
-      {canDelete && <button>Eliminar blogpost</button>}
+      {canDelete && <button>Eliminar blog</button>}
     </>
   );
 }
